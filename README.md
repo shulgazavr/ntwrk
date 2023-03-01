@@ -83,4 +83,17 @@ Office2----/
 4. У всех новых серверов отключить дефолт на нат (eth0), который вагрант поднимает для связи
 При нехватке сетевых интервейсов добавить по несколько адресов на интерфейс
 
-Формат сдачи ДЗ - vagrant + ansible
+Схематическое изображение сети:
+
+```
+office1Router ---\
+(office1Server)   \
+                   |----> centralRouter ----> inetRouter ----> internet
+(office2Server)   /      (centralServer)
+office2Router----/
+```
+
+
+
+
+

@@ -19,7 +19,7 @@
 - 192.168.0.64/26 - wifi
 ```
 Office1 ---\
-----> Central --IRouter --> internet
+            ----> Central --IRouter --> internet
 Office2----/
 ```
 Итого должны получится следующие сервера:

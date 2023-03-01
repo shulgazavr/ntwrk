@@ -87,9 +87,11 @@ Office2----/
 
 ```
 office1Router ---\
-(office1Server)   \
-                   |----> centralRouter ----> inetRouter ----> internet
-(office2Server)   /      (centralServer)
+       |          \
+(office1Server)    \
+                    |----> centralRouter ----> inetRouter ----> internet
+(office2Server)    /             |
+       |          /       (centralServer)
 office2Router----/
 ```
 

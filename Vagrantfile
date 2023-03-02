@@ -93,6 +93,13 @@ Vagrant.configure("2") do |config|
                       echo "net.ipv4.conf.all.forwarding=1" >> /etc/sysctl.conf
                       echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
                       echo "GATEWAY=192.168.255.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+                      iptables --table nat --append POSTROUTING --out-interface eth0 -j MASQUERADE
+                      iptables --append FORWARD --in-interface eth1 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth2 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth3 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth4 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth5 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth6 -j ACCEPT
                       ip ro add 192.168.2.0/24 via 192.168.20.2
                       ip ro add 192.168.1.0/24 via 192.168.10.2
                       sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
@@ -104,6 +111,13 @@ Vagrant.configure("2") do |config|
                       echo "net.ipv4.conf.all.forwarding=1" >> /etc/sysctl.conf
                       echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
                       echo "GATEWAY=192.168.20.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+                      iptables --append FORWARD --in-interface eth1 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth2 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth3 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth4 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth5 -j ACCEPT
+                      ip ro add 192.168.1.0/24 via 192.168.20.1
+                      ip ro add 192.168.0.0/24 via 192.168.20.1
                       sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
                       systemctl restart sshd        
                       systemctl restart network
@@ -113,6 +127,12 @@ Vagrant.configure("2") do |config|
                       echo "net.ipv4.conf.all.forwarding=1" >> /etc/sysctl.conf
                       echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
                       echo "GATEWAY=192.168.10.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+                      iptables --append FORWARD --in-interface eth1 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth2 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth3 -j ACCEPT
+                      iptables --append FORWARD --in-interface eth4 -j ACCEPT
+                      ip ro add 192.168.2.0/24 via 192.168.10.1
+                      ip ro add 192.168.0.0/24 via 192.168.10.1
                       sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
                       systemctl restart sshd         
                       systemctl restart network
@@ -122,6 +142,8 @@ Vagrant.configure("2") do |config|
                       echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
                       echo "GATEWAY=192.168.0.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
                       sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+                      ip ro add 192.168.1.0/24 via 192.168.0.1
+                      ip ro add 192.168.2.0/24 via 192.168.0.1
                       systemctl restart sshd
                       systemctl restart network
                     SHELL
@@ -129,6 +151,8 @@ Vagrant.configure("2") do |config|
                     box.vm.provision "shell", run: "always", inline: <<-SHELL
                       echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
                       echo "GATEWAY=192.168.2.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+                      ip ro add 192.168.0.0/24 via 192.168.2.1
+                      ip ro add 192.168.1.0/24 via 192.168.2.1
                       sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
                       systemctl restart sshd
                       systemctl restart network
@@ -137,6 +161,8 @@ Vagrant.configure("2") do |config|
                     box.vm.provision "shell", run: "always", inline: <<-SHELL
                       echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
                       echo "GATEWAY=192.168.1.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+                      ip ro add 192.168.0.0/24 via 192.168.1.1
+                      ip ro add 192.168.2.0/24 via 192.168.1.1
                       sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
                       systemctl restart sshd
                       systemctl restart network

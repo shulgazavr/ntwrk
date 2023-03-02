@@ -23,13 +23,13 @@ Office1 ---\
 Office2----/
 ```
 Итого должны получится следующие сервера:
-- inetRouter
-- centralRouter
-- office1Router
-- office2Router
-- centralServer
-- office1Server
-- office2Server
+- inetRouter - RI
+- centralRouter - RC
+- office1Router - R1
+- office2Router - R2
+- centralServer - SC
+- office1Server - S1
+- office2Server - S2
 
 ### Теоретическая часть.
 - Найти свободные подсети
@@ -86,13 +86,13 @@ Office2----/
 Схематическое изображение сети:
 
 ```
-office1Router ---\
-       |          \
-(office1Server)    \
-                    |----> centralRouter ----> inetRouter ----> internet
-(office2Server)    /             |
-       |          /       (centralServer)
-office2Router----/
+ R1 ---\
+ |      \
+(S1)     \
+          |----> RC ----> RI ----> internet
+(S2)     /       |
+ |      /       (SC)
+ R2----/
 ```
 
 
